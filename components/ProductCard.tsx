@@ -1,0 +1,61 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import { type Product } from "./ProductsListing";
+import Link from "next/link";
+
+interface ProductCardProps {
+  item: Product;
+}
+
+const ProductCard = ({ item }: ProductCardProps) => {
+  return (
+    <>
+      <Card
+        key={item.id}
+        className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-2 flex flex-col"
+      >
+        <CardHeader className="flex justify-center items-center h-32">
+          <Image
+            src={item.image}
+            alt={item.title}
+            height={80}
+            width={80}
+            className="hover:scale-110 transition-transform duration-300 ease-in-out cursor-pointer"
+          />
+        </CardHeader>
+        <CardContent className="p-2 flex-grow">
+          <CardTitle className="font-bold mb-2 leading-5">
+            {item.title}
+          </CardTitle>
+          <CardDescription className="text-gray-600 min-h-[3rem]">
+            {item.description.length > 70 ? (
+              <>{item.description.slice(0, 60)} ...</>
+            ) : (
+              item.description
+            )}
+            <p className="font-semibold dark:text-white text-black  mt-1 text-base">
+              ${item.price}
+            </p>
+          </CardDescription>
+        </CardContent>
+        <CardFooter></CardFooter>
+        <div className="flex items-center w-full justify-evenly px-2 pb-2 gap-3">
+          <Button className="w-full">Add to cart</Button>
+          <Button className="w-full" variant={"blue"} asChild>
+            <Link href={`/product/${item.id}`}>Read More</Link>
+          </Button>
+        </div>
+      </Card>
+    </>
+  );
+};
+
+export default ProductCard;
