@@ -10,12 +10,15 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { type Product } from "./ProductsListing";
 import Link from "next/link";
+import AddtoCardButton from "./AddtoCardButton";
+import RemoveFromCartButton from "./RemoveFromCartButton";
 
 interface ProductCardProps {
   item: Product;
+  fromCart?: boolean;
 }
 
-const ProductCard = ({ item }: ProductCardProps) => {
+const ProductCard = ({ item, fromCart }: ProductCardProps) => {
   return (
     <>
       <Card
@@ -48,7 +51,11 @@ const ProductCard = ({ item }: ProductCardProps) => {
         </CardContent>
         <CardFooter></CardFooter>
         <div className="flex items-center w-full justify-evenly px-2 pb-2 gap-3">
-          <Button className="w-full">Add to cart</Button>
+          {fromCart ? (
+            <RemoveFromCartButton item={item} />
+          ) : (
+            <AddtoCardButton item={item} />
+          )}
           <Button className="w-full" variant={"blue"} asChild>
             <Link href={`/product/${item.id}`}>Read More</Link>
           </Button>

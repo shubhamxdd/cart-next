@@ -32,7 +32,7 @@ const Navbar = () => {
           </li>
           <li>
             <Button variant={"link"} asChild>
-              <Link href="/">Downloads</Link>
+              <Link href="/cart">Cart</Link>
             </Button>
           </li>
           <ModeToggle />
@@ -78,7 +78,7 @@ const Navbar = () => {
                   <li>
                     <SheetClose asChild>
                       <Button variant={"link"} asChild>
-                        <Link href="/">Downloads</Link>
+                        <Link href="/cart">Cart</Link>
                       </Button>
                     </SheetClose>
                   </li>
