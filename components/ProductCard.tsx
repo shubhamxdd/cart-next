@@ -10,8 +10,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { type Product } from "./ProductsListing";
 import Link from "next/link";
-import AddtoCardButton from "./AddtoCardButton";
-import RemoveFromCartButton from "./RemoveFromCartButton";
+import AddRemoveFromCart from "./AddRemoveFromCart";
 
 interface ProductCardProps {
   item: Product;
@@ -35,9 +34,7 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
           />
         </CardHeader>
         <CardContent className="p-2 flex-grow">
-          <CardTitle className="font-bold mb-2 leading-5">
-            {item.title}
-          </CardTitle>
+          <h3 className="font-bold mb-2 leading-5">{item.title}</h3>
           <CardDescription className="text-gray-600 min-h-[3rem]">
             {item.description.length > 70 ? (
               <>{item.description.slice(0, 60)} ...</>
@@ -49,12 +46,11 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
             </p>
           </CardDescription>
         </CardContent>
-        <CardFooter></CardFooter>
         <div className="flex items-center w-full justify-evenly px-2 pb-2 gap-3">
           {fromCart ? (
-            <RemoveFromCartButton item={item} />
+            <AddRemoveFromCart isRemove item={item} />
           ) : (
-            <AddtoCardButton item={item} />
+            <AddRemoveFromCart isRemove={false} item={item} />
           )}
           <Button className="w-full" variant={"blue"} asChild>
             <Link href={`/product/${item.id}`}>Read More</Link>

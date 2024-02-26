@@ -21,7 +21,6 @@ const ProductsListing = () => {
   const fetchData = async () => {
     const res = await fetch("https://fakestoreapi.com/products");
     const data: Product[] = await res.json();
-    // console.log(data);
     setProducts(data);
   };
 
@@ -32,7 +31,7 @@ const ProductsListing = () => {
   return (
     <>
       {/* TODO FILTERING LOGIC HERE */}
-      <div className="flex justify-center flex-wrap ">
+      <div className="flex justify-center flex-wrap">
         {products.map((item) => {
           return <ProductCard item={item} key={item.id} />;
         })}

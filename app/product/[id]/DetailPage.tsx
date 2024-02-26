@@ -1,6 +1,6 @@
 "use client";
 
-import AddtoCardButton from "@/components/AddtoCardButton";
+import AddRemoveFromCart from "@/components/AddRemoveFromCart";
 import { Product } from "@/components/ProductsListing";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -25,9 +25,12 @@ const DetailPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-12 md:grid-cols-12 gap-6 mt-3">
         <div className="col-span-1 sm:col-span-4 md:col-span-4 container">
           <Image
-            src={product?.image!}
-            alt={product?.title!}
+            // todo remove next.svg and fix placeholder=blur
+            src={product?.image ?? "/next.svg"}
+            alt={product?.title ?? "Loading..."}
             width={400}
+            // placeholder="blur"
+            // blurDataURL=""
             className="top-4 sticky mt-5 mx-auto"
             height={400}
           />
@@ -79,7 +82,7 @@ const DetailPage = () => {
         </div>
         <div className="aside col-span-1 sm:col-span-3 md:col-span-3">
           <div className="flex flex-col gap-5 mt-10 sticky top-10 max-md:pb-20">
-            <AddtoCardButton item={product!} />
+            <AddRemoveFromCart item={product!} isRemove={false} />
             <Button variant={"blue"}>Buy Now</Button>
           </div>
         </div>

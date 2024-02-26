@@ -19,24 +19,18 @@ const Navbar = () => {
         <Link href={"/"}>StoreName</Link>
       </h1>
       <div className="max-md:hidden block">
-        <ul className="flex items-center">
-          <li>
-            <Button variant={"link"} asChild>
-              <Link href="/product">Products</Link>
-            </Button>
-          </li>
-          <li>
-            <Button variant={"link"} asChild>
-              <Link href="/">Contact Us</Link>
-            </Button>
-          </li>
-          <li>
-            <Button variant={"link"} asChild>
-              <Link href="/cart">Cart</Link>
-            </Button>
-          </li>
+        <div className="flex items-center">
+          <Button variant={"link"} asChild>
+            <Link href="/product">Products</Link>
+          </Button>
+          <Button variant={"link"} asChild>
+            <Link href="/">Contact Us</Link>
+          </Button>
+          <Button variant={"link"} asChild>
+            <Link href="/cart">Cart</Link>
+          </Button>
           <ModeToggle />
-        </ul>
+        </div>
       </div>
       <div className="hidden  max-md:flex items-center">
         <Sheet>
@@ -58,34 +52,36 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle>StoreName</SheetTitle>
-              <SheetDescription>
-                <ul className="">
-                  <li>
-                    <SheetClose asChild>
-                      <Button variant={"link"} asChild>
-                        <Link href="/product">Products</Link>
-                      </Button>
-                    </SheetClose>
-                  </li>
-                  <li>
-                    <SheetClose asChild>
-                      <Button variant={"link"} asChild>
-                        <Link href="/">Contact Us</Link>
-                      </Button>
-                    </SheetClose>
-                  </li>
-                  <li>
-                    <SheetClose asChild>
-                      <Button variant={"link"} asChild>
-                        <Link href="/cart">Cart</Link>
-                      </Button>
-                    </SheetClose>
-                  </li>
-                  <ModeToggle />
-                </ul>
-              </SheetDescription>
+              <SheetTitle asChild>
+                <SheetClose asChild>
+                  <Link href={"/"}>StoreName</Link>
+                </SheetClose>
+              </SheetTitle>
             </SheetHeader>
+            <ul className="flex flex-col mt-2 items-center">
+              <li>
+                <SheetClose asChild>
+                  <Button variant={"link"} asChild>
+                    <Link href="/product">Products</Link>
+                  </Button>
+                </SheetClose>
+              </li>
+              <li>
+                <SheetClose asChild>
+                  <Button variant={"link"} asChild>
+                    <Link href="/">Contact Us</Link>
+                  </Button>
+                </SheetClose>
+              </li>
+              <li>
+                <SheetClose asChild>
+                  <Button variant={"link"} asChild>
+                    <Link href="/cart">Cart</Link>
+                  </Button>
+                </SheetClose>
+              </li>
+              <ModeToggle />
+            </ul>
           </SheetContent>
         </Sheet>
       </div>
