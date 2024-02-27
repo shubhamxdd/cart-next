@@ -44,6 +44,7 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
             <p className="font-semibold dark:text-white text-black  mt-1 text-base">
               ${item.price}
             </p>
+            <p>Rating: {item.rating.rate} ⭐</p>
           </CardDescription>
         </CardContent>
         <div className="flex items-center w-full justify-evenly px-2 pb-2 gap-3">

@@ -17,7 +17,6 @@ const AddRemoveFromCart = ({ item, className, isRemove }: Props) => {
       onClick={() => {
         isRemove ? removeFromCart(item.id) : addToCart(item);
       }}
-      //   todo blue => default
       variant={isRemove ? "destructive" : "default"}
       className={`w-full ${className}`}
     >
