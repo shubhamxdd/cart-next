@@ -84,13 +84,6 @@ const ProductsListing = () => {
         ).map((item) => {
           return <ProductCard item={item} key={item.id} />;
         })}
-        {/* {sortOrderRating
-          ? sortedProductsRating.map((item) => {
-              return <ProductCard item={item} key={item.id} />;
-            })
-          : products.map((item) => {
-              return <ProductCard item={item} key={item.id} />;
-            })} */}
       </div>
     </>
   );

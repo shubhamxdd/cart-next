@@ -7,5 +7,5 @@ export default function Product() {
 
 export const metadata: Metadata = {
   title: "Product List",
-  description: "",
+  description: "Here we have a list of products.",
 };
