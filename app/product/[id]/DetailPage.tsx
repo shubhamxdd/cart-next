@@ -92,5 +92,3 @@ const DetailPage = () => {
 };
 
 export default DetailPage;
-
-// todo dynamic metadata

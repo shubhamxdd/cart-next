@@ -67,7 +67,6 @@ const ProductsListing = () => {
 
   return (
     <>
-      {/* TODO FILTERING LOGIC HERE */}
       <div className="flex gap-4 my-5 flex-wrap items-center justify-center">
         <SortByPrice
           setSortOrderPrice={setSortOrderPrice}
