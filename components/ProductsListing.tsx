@@ -75,7 +75,6 @@ const ProductsListing = () => {
         <CategoryButton setCategory={setCategory} />
       </div>
       <div className="flex justify-center flex-wrap">
-        {/* todo nahi samajh aaya ye */}
         {(sortOrderPrice
           ? sortedProductsPrice
           : sortOrderRating
