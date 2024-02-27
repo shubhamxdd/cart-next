@@ -24,7 +24,7 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
         key={item.id}
         className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-2 flex flex-col"
       >
-        <CardHeader className="flex justify-center items-center h-32">
+        <CardHeader className="flex justify-center items-center h-32 my-3">
           <Image
             src={item.image}
             alt={item.title}
