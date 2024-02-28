@@ -30,6 +30,8 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
             alt={item.title}
             height={80}
             width={80}
+            // TODO
+            // make a function that takes image url and converts it to base64 so i can use palceholder=blur
             className="hover:scale-110 transition-transform duration-300 ease-in-out cursor-pointer"
           />
         </CardHeader>
