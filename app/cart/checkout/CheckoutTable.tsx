@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { cartStore } from "@/store/cartStore";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const CheckoutTable = () => {
   const { cart } = cartStore();
@@ -69,7 +70,9 @@ const CheckoutTable = () => {
             <Button className="" variant={"ghost"}>
               Go Back
             </Button>
-            <Button className="">Make Payment</Button>
+            <Button className="" onClick={() => toast.error("Not implemented")}>
+              Make Payment
+            </Button>
           </div>
         </>
       )}
