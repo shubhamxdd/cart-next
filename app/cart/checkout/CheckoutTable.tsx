@@ -49,8 +49,8 @@ const CheckoutTable = () => {
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">
+            <TableCell className="py-3" colSpan={3}>Total</TableCell>
+            <TableCell className="text-right font-semibold">
               ${cartTotal.toFixed(2)}
             </TableCell>
           </TableRow>
