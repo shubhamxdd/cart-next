@@ -24,10 +24,14 @@ const Navbar = () => {
             <Link href="/product">Products</Link>
           </Button>
           <Button variant={"link"} asChild>
-            <Link href="/">Contact Us</Link>
+            <Link href="/cart">Cart</Link>
+          </Button>
+          {/* todo dont show these wne user is logged in show logout instead in Sheet component also */}
+          <Button variant={"link"} asChild>
+            <Link href="/signup">Signup</Link>
           </Button>
           <Button variant={"link"} asChild>
-            <Link href="/cart">Cart</Link>
+            <Link href="/login">Login</Link>
           </Button>
           <ModeToggle />
         </div>
@@ -69,14 +73,21 @@ const Navbar = () => {
               <li>
                 <SheetClose asChild>
                   <Button variant={"link"} asChild>
-                    <Link href="/">Contact Us</Link>
+                    <Link href="/cart">Cart</Link>
                   </Button>
                 </SheetClose>
               </li>
               <li>
                 <SheetClose asChild>
                   <Button variant={"link"} asChild>
-                    <Link href="/cart">Cart</Link>
+                    <Link href="/signup">Signup</Link>
+                  </Button>
+                </SheetClose>
+              </li>
+              <li>
+                <SheetClose asChild>
+                  <Button variant={"link"} asChild>
+                    <Link href="/login">Login</Link>
                   </Button>
                 </SheetClose>
               </li>
