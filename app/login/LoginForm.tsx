@@ -44,8 +44,6 @@ const LoginForm = () => {
       console.log("LoginForm", { res });
 
       if (!res?.error) {
-        // todo uncomment
-        // router.push("/product");
         router.push("/");
         toast.success("Logged in successfully");
         router.refresh();
@@ -102,7 +100,6 @@ const LoginForm = () => {
             <div className="flex items-center gap-2">
               <Input
                 type={isPasswordVisible ? "text" : "password"}
-                // todo icon add
                 {...register("password", {
                   required: true,
                   minLength: {
