@@ -24,37 +24,6 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
-  //   try {
-  // setSubmitting(true);
-  // if (!data.email || !data.password) {
-  //   toast.error("Please fill all fields");
-  //   return;
-  // }
-  // const res = await signIn("credentials", {
-  //   email: data.email,
-  //   password: data.password,
-  //   redirect: false,
-  // });
-  // console.log("LoginForm", { res });
-
-  //     if (!res?.error) {
-  //       // todo uncomment
-  //       // router.push("/product");
-  //       router.push("/");
-  //       toast.success("Logged in successfully");
-  //       router.refresh();
-  //     }
-  //     setSubmitting(false);
-  //   } catch (error) {
-  //     toast.error("Error logging in");
-  //     console.log(error);
-  //     setSubmitting(false);
-  //   } finally {
-  //     setSubmitting(false);
-  //   }
-  // };
-
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       setSubmitting(true);
@@ -104,10 +73,19 @@ const LoginForm = () => {
               Email
             </Label>
             <Input
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required",
+                minLength: {
+                  value: 1,
+                  message: "Minimum length is 1",
+                },
+              })}
               id="email"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {errors.email && (
+              <p className="text-red-400">{errors.email.message}</p>
+            )}
           </div>
           <div className="mb-6">
             <Label
@@ -118,10 +96,19 @@ const LoginForm = () => {
             </Label>
             <Input
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                minLength: {
+                  value: 1,
+                  message: "Minimum length is 1",
+                },
+              })}
               id="password"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {errors.password && (
+              <p className="text-red-400">{errors.password.message}</p>
+            )}
           </div>
           <div className="mb-4 -mt-2">
             <p>

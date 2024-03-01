@@ -64,10 +64,23 @@ const SignupForm = () => {
               Email
             </Label>
             <Input
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required!",
+                minLength: {
+                  value: 1,
+                  message: "Minimum length is ",
+                },
+                // pattern: {
+                //   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                //   message: "Invalid email address",
+                // },
+              })}
               id="email"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {errors.email && (
+              <p className="text-red-400">{errors.email.message}</p>
+            )}
           </div>
           <div className="mb-4">
             <Label
@@ -77,10 +90,19 @@ const SignupForm = () => {
               Username
             </Label>
             <Input
-              {...register("name", { required: true })}
+              {...register("name", {
+                required: "Name is required",
+                minLength: {
+                  value: 1,
+                  message: "Minimum length is ",
+                },
+              })}
               id="name"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {errors.name && (
+              <p className="text-red-400">{errors.name.message}</p>
+            )}
           </div>
           <div className="mb-6">
             <Label
@@ -91,10 +113,19 @@ const SignupForm = () => {
             </Label>
             <Input
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: "Password is required!",
+                minLength: {
+                  value: 1,
+                  message: "Minimum length is ",
+                },
+              })}
               id="password"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
+            {errors.password && (
+              <p className="text-red-400">{errors.password.message}</p>
+            )}
           </div>
           <div className="mb-4 -mt-2">
             <p>
