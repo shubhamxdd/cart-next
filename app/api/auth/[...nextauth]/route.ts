@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { sql } from "@vercel/postgres";
+import { compare } from "bcrypt";
 
 const handler = NextAuth({
   session: {
@@ -22,20 +23,20 @@ const handler = NextAuth({
 
         const user = res.rows[0];
 
-        if (user) {
-          if (user.password === credentials?.password) {
-            return {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-            };
-          }
-          if (user.password !== credentials?.password) {
-            return { message: "Password incorrect" };
-          }
+        const isPasswordCorrect = await compare(
+          credentials?.password || "",
+          user.password
+        );
+
+        if (isPasswordCorrect) {
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
         }
 
-        console.log({ credentials });
+        console.log("credentials from ...nextauth route", { credentials });
 
         return null;
       },

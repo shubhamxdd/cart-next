@@ -31,7 +31,7 @@ const LoginForm = () => {
       password: data.password,
       redirect: false,
     });
-    console.log({ res });
+    console.log("LoginForm", { res });
 
     if (!res?.error) {
       // todo uncomment
@@ -70,6 +70,7 @@ const LoginForm = () => {
               Password
             </Label>
             <Input
+              type="password"
               {...register("password", { required: true })}
               id="password"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
