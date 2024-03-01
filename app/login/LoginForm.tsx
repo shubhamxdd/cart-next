@@ -1,9 +1,28 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    // post req TODO
+  };
   return (
     <>
       <h1 className="text-2xl mb-6 text-center dark:text-white">
@@ -11,7 +30,7 @@ const LoginForm = () => {
       </h1>
 
       <div className="border-[1px] border-zinc-400 px-10 py-5 rounded-lg shadow-lg max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <Label
               htmlFor="email"
@@ -20,6 +39,7 @@ const LoginForm = () => {
               Email
             </Label>
             <Input
+              {...register("email", { required: true })}
               id="email"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
@@ -32,6 +52,7 @@ const LoginForm = () => {
               Password
             </Label>
             <Input
+              {...register("password", { required: true })}
               id="password"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
