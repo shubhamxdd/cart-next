@@ -3,7 +3,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 const LoginLoading = () => {
   return (
     <>
-    {/* todo signup ka bhi center  */}
       <div className="flex flex-col justify-center h-full">
         <Skeleton className="w-[30%] mb-6 h-10 rounded-lg" />
 
