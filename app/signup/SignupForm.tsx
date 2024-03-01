@@ -31,26 +31,32 @@ const SignupForm = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    setSubmitting(true);
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) {
-      const errorData = await res.json();
-      console.error("Error:", errorData);
-      toast.error("Error: " + errorData.message);
+    try {
+      setSubmitting(true);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Error:", errorData);
+        toast.error("Error: " + errorData.message);
+      } else {
+        console.log("Registration successful");
+        toast.success("Registration successful");
+        router.push("/login");
+      }
+      console.log("Response", res);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred");
+    } finally {
+      setSubmitting(false);
     }
-    if (res.ok) {
-      console.log("Registration successful");
-      toast.success("Registration successful");
-      router.push("/login");
-    }
-    console.log("Response", res);
-    setSubmitting(false);
   };
 
   return (
