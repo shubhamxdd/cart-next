@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 type Inputs = {
   email: string;
@@ -21,26 +22,72 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    setSubmitting(true);
-    const res = await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
-    console.log("LoginForm", { res });
+  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  //   try {
+  // setSubmitting(true);
+  // if (!data.email || !data.password) {
+  //   toast.error("Please fill all fields");
+  //   return;
+  // }
+  // const res = await signIn("credentials", {
+  //   email: data.email,
+  //   password: data.password,
+  //   redirect: false,
+  // });
+  // console.log("LoginForm", { res });
 
-    if (!res?.error) {
-      // todo uncomment
-      // router.push("/product");
-      router.push("/");
-      router.refresh();
+  //     if (!res?.error) {
+  //       // todo uncomment
+  //       // router.push("/product");
+  //       router.push("/");
+  //       toast.success("Logged in successfully");
+  //       router.refresh();
+  //     }
+  //     setSubmitting(false);
+  //   } catch (error) {
+  //     toast.error("Error logging in");
+  //     console.log(error);
+  //     setSubmitting(false);
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      setSubmitting(true);
+      if (!data.email || !data.password) {
+        toast.error("Please fill all fields");
+        return;
+      }
+      const res = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+      console.log("LoginForm", { res });
+
+      if (!res?.error) {
+        // todo uncomment
+        // router.push("/product");
+        router.push("/");
+        toast.success("Logged in successfully");
+        router.refresh();
+      } else {
+        toast.error(res.error);
+      }
+      setSubmitting(false);
+    } catch (error) {
+      toast.error("Error logging in");
+      console.log(error);
+      setSubmitting(false);
+    } finally {
+      setSubmitting(false);
     }
-    setSubmitting(false);
   };
+
   return (
     <>
       <h1 className="text-2xl mb-6 text-center dark:text-white">

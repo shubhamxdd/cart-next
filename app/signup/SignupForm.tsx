@@ -7,14 +7,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Inputs = {
   email: string;
   name: string;
   password: string;
 };
-
-// todo form handling using react hook form TODO
 
 const SignupForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -24,7 +23,6 @@ const SignupForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -39,9 +37,11 @@ const SignupForm = () => {
     if (!res.ok) {
       const errorData = await res.json();
       console.error("Error:", errorData);
+      toast.error("Error: " + errorData.message);
     }
     if (res.ok) {
       console.log("Registration successful");
+      toast.success("Registration successful");
       router.push("/login");
     }
     console.log("Response", res);

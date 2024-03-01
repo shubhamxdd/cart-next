@@ -30,7 +30,6 @@ const Navbar = async () => {
           <Button variant={"link"} asChild>
             <Link href="/cart">Cart</Link>
           </Button>
-          {/* todo dont show these wne user is logged in show logout instead in Sheet component also */}
           {session ? (
             <Button variant={"link"} asChild>
               <LogoutButton />
