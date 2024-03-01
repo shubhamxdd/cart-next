@@ -4,17 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
   email: string;
-  username: string;
+  name: string;
   password: string;
 };
 
 // todo form handling using react hook form TODO
 
 const SignupForm = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -22,9 +27,25 @@ const SignupForm = () => {
     watch,
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // post req TODO
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setSubmitting(true);
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Error:", errorData);
+    }
+    if (res.ok) {
+      console.log("Registration successful");
+      router.push("/login");
+    }
+    console.log("Response", res);
+    setSubmitting(false);
   };
 
   return (
@@ -50,14 +71,14 @@ const SignupForm = () => {
           </div>
           <div className="mb-4">
             <Label
-              htmlFor="username"
+              htmlFor="name"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
             >
               Username
             </Label>
             <Input
-              {...register("username", { required: true })}
-              id="username"
+              {...register("name", { required: true })}
+              id="name"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -82,7 +103,7 @@ const SignupForm = () => {
               </Button>
             </p>
           </div>
-          <Button type="submit" variant={"submit"}>
+          <Button type="submit" variant={"submit"} disabled={submitting}>
             Create
           </Button>
         </form>

@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Inputs = {
   email: string;
@@ -12,6 +15,8 @@ type Inputs = {
 };
 
 const LoginForm = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,9 +24,22 @@ const LoginForm = () => {
     watch,
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // post req TODO
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setSubmitting(true);
+    const res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    console.log({ res });
+
+    if (!res?.error) {
+      // todo uncomment
+      // router.push("/product");
+      router.push("/");
+      router.refresh();
+    }
+    setSubmitting(false);
   };
   return (
     <>
@@ -65,7 +83,7 @@ const LoginForm = () => {
               </Button>
             </p>
           </div>
-          <Button type="submit" variant={"submit"}>
+          <Button type="submit" variant={"submit"} disabled={submitting}>
             Login
           </Button>
         </form>

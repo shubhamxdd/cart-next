@@ -11,8 +11,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import LogoutButton from "@/app/logout";
+import { getServerSession } from "next-auth";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const session = await getServerSession();
+
   return (
     <div className="flex items-center justify-between px-10 py-2 bg-stone-200 dark:bg-slate-600 max-md:px-6">
       <h1 className="text-xl">
@@ -27,12 +31,20 @@ const Navbar = () => {
             <Link href="/cart">Cart</Link>
           </Button>
           {/* todo dont show these wne user is logged in show logout instead in Sheet component also */}
-          <Button variant={"link"} asChild>
-            <Link href="/signup">Signup</Link>
-          </Button>
-          <Button variant={"link"} asChild>
-            <Link href="/login">Login</Link>
-          </Button>
+          {session ? (
+            <Button variant={"link"} asChild>
+              <LogoutButton />
+            </Button>
+          ) : (
+            <>
+              <Button variant={"link"} asChild>
+                <Link href="/signup">Signup</Link>
+              </Button>
+              <Button variant={"link"} asChild>
+                <Link href="/login">Login</Link>
+              </Button>
+            </>
+          )}
           <ModeToggle />
         </div>
       </div>
@@ -77,20 +89,33 @@ const Navbar = () => {
                   </Button>
                 </SheetClose>
               </li>
-              <li>
-                <SheetClose asChild>
-                  <Button variant={"link"} asChild>
-                    <Link href="/signup">Signup</Link>
-                  </Button>
-                </SheetClose>
-              </li>
-              <li>
-                <SheetClose asChild>
-                  <Button variant={"link"} asChild>
-                    <Link href="/login">Login</Link>
-                  </Button>
-                </SheetClose>
-              </li>
+              {!session && (
+                <>
+                  <li>
+                    <SheetClose asChild>
+                      <Button variant={"link"} asChild>
+                        <Link href="/signup">Signup</Link>
+                      </Button>
+                    </SheetClose>
+                  </li>
+                  <li>
+                    <SheetClose asChild>
+                      <Button variant={"link"} asChild>
+                        <Link href="/login">Login</Link>
+                      </Button>
+                    </SheetClose>
+                  </li>
+                </>
+              )}
+              {session && (
+                <li>
+                  <SheetClose asChild>
+                    <Button variant={"link"} asChild>
+                      <LogoutButton />
+                    </Button>
+                  </SheetClose>
+                </li>
+              )}
               <ModeToggle />
             </ul>
           </SheetContent>
