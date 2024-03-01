@@ -17,6 +17,7 @@ type Inputs = {
 
 const SignupForm = () => {
   const [submitting, setSubmitting] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const router = useRouter();
 
   const {
@@ -24,6 +25,10 @@ const SignupForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const showPassword = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setSubmitting(true);
@@ -70,10 +75,6 @@ const SignupForm = () => {
                   value: 1,
                   message: "Minimum length is ",
                 },
-                // pattern: {
-                //   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                //   message: "Invalid email address",
-                // },
               })}
               id="email"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -111,18 +112,23 @@ const SignupForm = () => {
             >
               Password
             </Label>
-            <Input
-              type="password"
-              {...register("password", {
-                required: "Password is required!",
-                minLength: {
-                  value: 1,
-                  message: "Minimum length is ",
-                },
-              })}
-              id="password"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            />
+            <div className="flex items-center gap-2">
+              <Input
+                type={isPasswordVisible ? "text" : "password"}
+                {...register("password", {
+                  required: "Password is required!",
+                  minLength: {
+                    value: 1,
+                    message: "Minimum length is ",
+                  },
+                })}
+                id="password"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              />
+              <Button type="button" onClick={showPassword}>
+                {isPasswordVisible ? "Hide" : "Show"}
+              </Button>
+            </div>
             {errors.password && (
               <p className="text-red-400">{errors.password.message}</p>
             )}

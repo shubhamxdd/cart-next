@@ -27,8 +27,7 @@ const DetailPage = () => {
         <div className="col-span-1 sm:col-span-4 md:col-span-4 container">
           {product?.image ? (
             <Image
-              // todo placeholder=blur
-              src={product?.image ?? ""}
+              src={product?.image}
               alt={product?.title ?? "Loading..."}
               width={400}
               height={400}

@@ -17,12 +17,17 @@ type Inputs = {
 
 const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const showPassword = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -94,18 +99,24 @@ const LoginForm = () => {
             >
               Password
             </Label>
-            <Input
-              type="password"
-              {...register("password", {
-                required: true,
-                minLength: {
-                  value: 1,
-                  message: "Minimum length is 1",
-                },
-              })}
-              id="password"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            />
+            <div className="flex items-center gap-2">
+              <Input
+                type={isPasswordVisible ? "text" : "password"}
+                // todo icon add
+                {...register("password", {
+                  required: true,
+                  minLength: {
+                    value: 1,
+                    message: "Minimum length is 1",
+                  },
+                })}
+                id="password"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              />
+              <Button type="button" onClick={showPassword}>
+                {isPasswordVisible ? "Hide" : "Show"}
+              </Button>
+            </div>
             {errors.password && (
               <p className="text-red-400">{errors.password.message}</p>
             )}
