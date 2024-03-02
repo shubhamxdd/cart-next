@@ -1,24 +1,17 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import CartErr from "./CartErr";
+import { Metadata } from "next";
 
 const PaymentErrorPage = () => {
-  const router = useRouter();
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold mb-4">Payment Failed!</h1>
-        <p className="text-xl">
-          There was an error processing your payment. Please try again.
-        </p>
-        <Button className="mt-4" onClick={() => router.back()}>
-          Go back and retry
-        </Button>
-      </div>
+      <CartErr />
     </>
   );
 };
 
 export default PaymentErrorPage;
+
+export const metadata: Metadata = {
+  title: "Payment Failed",
+  description: "There was an error processing your payment. Please try again.",
+};
