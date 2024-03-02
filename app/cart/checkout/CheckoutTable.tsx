@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { cartStore } from "@/store/cartStore";
 import Image from "next/image";
-import toast from "react-hot-toast";
+import CheckoutForm from "./CheckoutForm";
 
 const CheckoutTable = () => {
   const { cart } = cartStore();
@@ -66,14 +66,12 @@ const CheckoutTable = () => {
               </TableRow>
             </TableFooter>
           </Table>
-          <div className="flex justify-between my-2">
-            <Button className="" variant={"ghost"}>
-              Go Back
-            </Button>
-            <Button className="" onClick={() => toast.error("Not implemented")}>
-              Make Payment
-            </Button>
+          <div>
+            <CheckoutForm />
           </div>
+          {/* <div className="flex justify-between my-2">
+            
+          </div> */}
         </>
       )}
     </>
