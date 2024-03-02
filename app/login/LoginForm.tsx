@@ -76,6 +76,7 @@ const LoginForm = () => {
               Email
             </Label>
             <Input
+              defaultValue={"test@test.com"}
               type="email"
               {...register("email", {
                 required: "Email is required",
@@ -104,6 +105,7 @@ const LoginForm = () => {
             </Label>
             <div className="flex items-center gap-2">
               <Input
+                defaultValue={"test"}
                 type={isPasswordVisible ? "text" : "password"}
                 {...register("password", {
                   required: true,
