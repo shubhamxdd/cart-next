@@ -76,11 +76,16 @@ const LoginForm = () => {
               Email
             </Label>
             <Input
+              type="email"
               {...register("email", {
                 required: "Email is required",
                 minLength: {
                   value: 1,
                   message: "Minimum length is 1",
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
                 },
               })}
               id="email"
