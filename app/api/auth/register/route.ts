@@ -6,10 +6,16 @@ import { hash } from "bcrypt";
 export async function POST(request: Request) {
   try {
     const { email, password, name } = await request.json();
+
+    // validate email
+    if (!email || !email.includes("@")) {
+      return NextResponse.json({ message: "Invalid email" });
+    }
+
     // check if email already exists
 
     const userRes = await sql`SELECT * FROM users WHERE email = ${email}`;
-    const user = userRes.rows[0]
+    const user = userRes.rows[0];
     if (user) {
       return NextResponse.json({ message: "User already exists" });
     }

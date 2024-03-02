@@ -18,6 +18,11 @@ const handler = NextAuth({
         password: {},
       },
       async authorize(credentials, req) {
+        // validate email
+        if (!credentials?.email || !credentials?.email.includes("@")) {
+          return null;
+        }
+
         const res =
           await sql`SELECT * FROM users WHERE email=${credentials?.email}`;
 
