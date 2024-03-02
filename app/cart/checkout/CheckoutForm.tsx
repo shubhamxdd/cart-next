@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { cartStore } from "@/store/cartStore";
 
 type Input = {
   name: string;
@@ -12,6 +13,7 @@ type Input = {
   zip: string;
 };
 const CheckoutForm = () => {
+  const { clearCart } = cartStore();
   const router = useRouter();
   const {
     register,
@@ -91,6 +93,7 @@ const CheckoutForm = () => {
             await toastPromise()
               .then((res) => {
                 if (res === "Payment successful") {
+                  clearCart();
                   router.push("/cart/success");
                 }
               })
