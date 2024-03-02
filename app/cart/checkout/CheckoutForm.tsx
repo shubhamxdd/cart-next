@@ -46,7 +46,7 @@ const CheckoutForm = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 mt-6 mb-10"
+        className="flex flex-col gap-3 mt-10 mb-10"
       >
         <Input
           {...register("name", { required: true })}
@@ -82,7 +82,7 @@ const CheckoutForm = () => {
           <span className="text-red-400">This field is required</span>
         )}
       </form>
-      <div className="flex justify-between my-2 items-center">
+      <div className="flex justify-between my-8 items-center">
         <Button className="" variant={"ghost"} onClick={() => router.back()}>
           Go Back
         </Button>
