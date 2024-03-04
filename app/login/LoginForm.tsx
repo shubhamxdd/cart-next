@@ -44,7 +44,7 @@ const LoginForm = () => {
       console.log("LoginForm", { res });
 
       if (!res?.error) {
-        router.push("/");
+        router.push("/product");
         toast.success("Logged in successfully");
         router.refresh();
       } else {
