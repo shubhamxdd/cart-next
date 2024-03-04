@@ -26,11 +26,11 @@ const CheckoutForm = () => {
     return toast.promise(
       new Promise((resolve, reject) => {
         setTimeout(() => {
-          const randNo = Math.floor(Math.random() * 2);
+          // const randNo = Math.floor(Math.random() * 2);
 
-          if (randNo === 0) {
-            return reject("Payment failed");
-          }
+          // if (randNo === 0) {
+          //   return reject("Payment failed");
+          // }
           return resolve("Payment successful");
         }, 3000);
       }),

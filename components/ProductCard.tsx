@@ -34,7 +34,9 @@ const ProductCard = ({ item, fromCart }: ProductCardProps) => {
           />
         </CardHeader>
         <CardContent className="p-2 flex-grow">
-          <h3 className="font-bold mb-2 leading-5">{item.title}</h3>
+          <Link href={`/product/${item.id}`}>
+            <h3 className="font-bold mb-2 leading-5">{item.title}</h3>
+          </Link>
           <CardDescription className="text-gray-600 min-h-[3rem]">
             {item.description.length > 70 ? (
               <>{item.description.slice(0, 60)} ...</>

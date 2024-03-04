@@ -4,13 +4,16 @@ import AddRemoveFromCart from "@/components/AddRemoveFromCart";
 import { Product } from "@/components/ProductsListing";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cartStore } from "@/store/cartStore";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const DetailPage = () => {
+  const { clearCart, addToCart } = cartStore();
   const [product, setProduct] = useState<Product | null>(null);
   const { id } = useParams();
+  const router = useRouter()
 
   const fetchData = async () => {
     const res = await fetch(`https://fakestoreapi.com/products/${id}`);
@@ -21,6 +24,15 @@ const DetailPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleClick = () => {
+    clearCart();
+    addToCart(product!);
+
+    router.push("/cart/checkout")
+
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-12 md:grid-cols-12 gap-6 mt-3">
@@ -100,7 +112,9 @@ const DetailPage = () => {
         <div className="aside col-span-1 sm:col-span-3 md:col-span-3">
           <div className="flex flex-col gap-5 mt-10 sticky top-10 max-md:pb-20">
             <AddRemoveFromCart item={product!} isRemove={false} />
-            <Button variant={"blue"}>Buy Now</Button>
+            <Button variant={"blue"} onClick={handleClick}>
+              Buy Now
+            </Button>
           </div>
         </div>
       </div>

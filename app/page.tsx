@@ -1,10 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 export default async function Product() {
   const session = await getServerSession();
   return (
     <>
       <h1 className="text-2xl text-center mt-2">HOMEPAGE</h1>
+      <Button variant={"default"} asChild><Link href={"/product"}>Go to products page</Link></Button>
       {session ? (
         <div>
           you are currently logged in
